@@ -19,29 +19,28 @@ function bruteForceTwoSum(array, sum){
 
 function hashTwoSum(array, sum){
     let numsObj = {}
-    let sumNumsArray = []
-    for(let eachNum in array){
-        let num2 = sum - array[eachNum]
-        
-        if (num2 in numsObj){
-            sumNumsArray.push([num2, array[eachNum]])
+    let nums = []
+    for(let i in array){
+        let addend = sum - array[i]
+        if (addend in numsObj){
+            nums.push([addend, array[i]])
         }
-        numsObj[array[eachNum]] = eachNum
+        numsObj[array[i]] = i
     }
-    return sumNumsArray
+    return nums
 }
 
-let binarySearch = (array, x, start=0, end=array.length-1) => {
+let binarySearch = (array, target, start=0, end=array.length-1) => {
         let mid = Math.floor(start + (end - start)/2)
         switch(true){
-        case array[mid] === x:
+        case array[mid] === target:
             return array[mid]
         case end - start === 0:
             return false
-         case array[mid] > x:
-            return binarySearch(array, x, start, mid)
-         case array[mid] < x:
-            return binarySearch(array, x, mid+1, end)    
+         case array[mid] > target:
+            return binarySearch(array, target, start, mid)
+         case array[mid] < target:
+            return binarySearch(array, target, mid+1, end)    
     }
 }
 
