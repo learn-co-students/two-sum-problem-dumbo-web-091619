@@ -48,27 +48,18 @@ let binarySearch = (array, x, start=0, end=array.length-1) => {
 function binarySearchTwoSum(array, sum){
     let nums = []
     let sortedArray = array.sort()
-    for (let i in array.length){
-        let siblingIndex = binarySearch(array, sum-array[i])
-        if (siblingIndex >= 0){
-            switch(true){
-                case i > 0 && array[i-1] === arra[i]:
-                    nums.push([array[i], array[siblingIndex]])
-                case i < array.length - 1 && array[i+1] === arr[i]:
-                    nums.push([array[i], array[siblingIndex]])
-            }
+    console.log(sortedArray)
+    for (let i in sortedArray){
+        let addend = binarySearch(sortedArray, sum-sortedArray[i])
+        console.log(`array[i]: ${array[i]}`)
+        console.log(`addend: ${addend}`)
+        if (!!addend && !nums.flat(Infinity).includes(array[i]) && !nums.flat(Infinity).includes(addend)){
+            nums.push([sortedArray[i], addend])
         }
     }
-   return nums
+    return nums
 }
 
 function binaryMatch(array, sum){
-    for(let x = 0; x < array.length; x++){
-        for(let y = 0; y < array.length; y++){
-            if(array[x] + array[y] === sum){
-                return true
-                }
-            }
-       }
-   return false
+    return !!binarySearchTwoSum(array, sum).length ? true : false
 }
